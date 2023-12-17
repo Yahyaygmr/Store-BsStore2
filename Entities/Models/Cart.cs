@@ -14,7 +14,7 @@ namespace Entities.Models
             Lines = new List<CartLine>();
         }
 
-        public void AddItem(Product product, int quantity)
+        public virtual void AddItem(Product product, int quantity)
         {
             CartLine? line = Lines.Where(l => l.Product.ProductId == product.ProductId).FirstOrDefault();
 
@@ -32,16 +32,16 @@ namespace Entities.Models
             }
 
         }
-        public void RemoveItem(Product product)
+        public virtual void RemoveItem(Product product)
         {
             Lines.RemoveAll(l => l.Product.ProductId == product.ProductId);
         }
-
+        virtual
         public decimal ComputeTotalValue()
         {
             return Lines.Sum(e => e.Product.Price * e.Quantity);
         }
-        public void Clear()
+        public virtual void Clear()
         {
             Lines.Clear();
         }
