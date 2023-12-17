@@ -17,6 +17,17 @@ builder.Services.AddDbContext<RepositoryContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("sqlConnection"),
     b => b.MigrationsAssembly("StoreApp"));
 });
+//start Session 
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "StoreApp.Session";
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+});
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+//end Session
 
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -26,7 +37,7 @@ builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddScoped<IProductService, ProductManager>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 
-builder.Services.AddSingleton<Cart>();
+builder.Services.AddScoped<Cart>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
@@ -34,6 +45,8 @@ builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 
 app.UseStaticFiles();
+
+app.UseSession();
 
 app.UseHttpsRedirection();
 
