@@ -1,0 +1,33 @@
+﻿@model IQueryable<Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h1>Categories</h1>
+<br>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Category Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Category ctg in Model)
+        {
+            <tr>
+                <td>@ctg.CategoryId</td>
+                <td>@ctg.CategoryName</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Category" asp-action="Get" asp-route-id="@ctg.CategoryId">Detail</a>
+                    <a class="btn btn-info" href="#">Update</a>
+                    <a class="btn btn-danger" href="#">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

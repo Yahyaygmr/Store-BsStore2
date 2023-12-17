@@ -1,0 +1,31 @@
+
+@model List<Product>
+@{
+    ViewData["Title"] = "Product";
+}
+<h1>Product</h1>
+<br>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Product prd in Model)
+        {
+            <tr>
+                <td>@prd.ProductName</td>
+                <td>@prd.Price.ToString("c")</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Product" asp-action="Get" asp-route-id="@prd.ProductId">Detail</a>
+                    <a class="btn btn-info" href="#">Update</a>
+                    <a class="btn btn-danger" href="#">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
