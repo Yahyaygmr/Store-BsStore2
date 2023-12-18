@@ -46,7 +46,9 @@
                 <div class="navbar-nav">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Cart">Cart</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Cart">
+                                <i class="fa fa-cart-shopping"></i> Cart (@await Component.InvokeAsync("CartSummary"))
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Dashboard"

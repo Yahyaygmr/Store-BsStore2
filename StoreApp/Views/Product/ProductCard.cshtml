@@ -1,3 +1,4 @@
+
 @model IQueryable<Product>
 
 @{
@@ -28,7 +29,7 @@
                                     <form id="@prd?.ProductId" asp-page="/Cart" method="post">
                                        @*  uygulama burada patlýyor *@
                                         <input type="hidden" name="ProductId" value="@prd.ProductId" />
-                                        <input type="hidden" name="returnUrl" value="/Product/Get/@prd?.ProductId" />
+                                        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                                         <button class="btn btn-outline-primary"><i class="fa fa-cart-plus"></i></button>
                                     </form>
                                 </div>
