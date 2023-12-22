@@ -3,6 +3,7 @@ using Entities.Models;
 using Repositories;
 using Repositories.Contracts;
 using Services.Contracts;
+using Entities.RequestParameters;
 
 namespace StoreApp.Controllers
 {
@@ -27,9 +28,9 @@ namespace StoreApp.Controllers
             return View(prd);
         }
 
-        public IActionResult ProductCard()
+        public IActionResult ProductCard(ProductRepuestParameters p)
         {
-            var model = _serviceManager.ProductService.GetAllProducts(false);
+            var model = _serviceManager.ProductService.GetAllProductsWithDetails(p);
             // view kýsmýnda IQueryable lullandýðýmýz için tolist eklemedik sonuna (List<Product> olursa .Tolist() eklenmeli
             // Index örnek olarak alýnýp karþýlaþtýrýlabilir. Çýktý ayný fakat yöntem farklý)
             return View(model);
