@@ -1,0 +1,54 @@
+﻿@model IQueryable<Product>
+
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-3">
+        @await Component.InvokeAsync("CategoryList")
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            @foreach (Product prd in Model)
+            {
+                <div class="col-sm-12 col-md-4 my-2">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header text-center">
+                            @prd?.ProductName
+                        </div>
+
+                        <img src="@prd?.ImageUrl" class="card-img-top" alt="..." height="330">
+
+                        <div class="card-body">
+                            <div class="card-text">
+                                <div class="text-danger text-center lead p-2 rounded-2">
+                                    @prd?.Price.ToString("C2")
+                                </div>
+                            </div>
+
+                            <p class="card-text">@prd?.Summary</p>
+                            <div class="d-flex justify-content-center">
+                                <div class="btn btn-group">
+                                    <a asp-controller="Product" asp-action="Get" asp-route-id="@prd.ProductId"
+                                       class="btn btn-outline-secondary rounded-2">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <form id="@prd?.ProductId" asp-page="/Cart" method="post">
+                                        @*  uygulama burada patlıyor *@
+                                        <input type="hidden" name="ProductId" value="@prd.ProductId" />
+                                        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                                        <button class="btn btn-outline-primary"><i class="fa fa-cart-plus"></i></button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+        </div>
+    </div>
+
+</div>

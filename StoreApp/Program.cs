@@ -15,6 +15,8 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
+
+
 app.UseStaticFiles();
 
 app.UseSession();
@@ -38,8 +40,6 @@ app.UseEndpoints(endpoints =>
     endpoints.MapRazorPages();
 });
 
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.ConfigureAndCheckMigration();
 
 app.Run();

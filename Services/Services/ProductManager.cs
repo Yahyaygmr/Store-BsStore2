@@ -63,6 +63,12 @@ namespace Services
             return productDto;
         }
 
+        public IEnumerable<Product> GetShowCaseProducts(bool trackChanges)
+        {
+            var products = _repositoryManager.Product.GetShowCaseProducts(trackChanges);
+            return products;
+        }
+
         public void UpdateOneProduct(ProductDtoForUpdate productDto)
         {
             //Hocanın Yaptığı (daha alttta(repositoryde) tanımlama yapmadı.)

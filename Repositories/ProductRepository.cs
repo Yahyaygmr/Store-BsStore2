@@ -34,6 +34,12 @@ namespace Repositories
             return FindByCondition(x => x.ProductId.Equals(id), trackChanges);
         }
 
+        public IQueryable<Product> GetShowCaseProducts(bool trackChanges)
+        {
+            return FindAll(trackChanges)
+                .Where(p => p.ShowCase == true);
+        }
+
         public void UpdateOneProduct(Product product)
         {
             Update(product);
