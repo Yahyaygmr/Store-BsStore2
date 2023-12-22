@@ -1,4 +1,3 @@
-
 @model IQueryable<Product>
 
 @{
@@ -14,38 +13,40 @@
         <div class="row">
             @foreach (Product prd in Model)
             {
-                <div class="col-md-4 mt-3">
+                <div class="col-sm-12 col-md-4 my-2">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="@prd?.ImageUrl" alt="Card image cap" height="330">
-                        <div class="card-body">
-                            <h5 class="card-title">@prd?.ProductName</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up the bulk of the
-                                card's
-                                content.
-                            </p>
+                        <div class="card-header text-center">
+                            @prd?.ProductName
+                        </div>
 
-                            <div class="row">
-                                <div class="col-md-3">
+                        <img src="@prd?.ImageUrl" class="card-img-top" alt="..." height="330">
+
+                        <div class="card-body">
+                            <div class="card-text">
+                                <div class="text-danger text-center lead p-2 rounded-2">
+                                    @prd?.Price.ToString("C2")
+                                </div>
+                            </div>
+
+                            <p class="card-text">@prd?.Summary</p>
+                            <div class="d-flex justify-content-center">
+                                <div class="btn btn-group">
+                                    <a asp-controller="Product" asp-action="Get" asp-route-id="@prd.ProductId"
+                                       class="btn btn-outline-secondary rounded-2">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
                                     <form id="@prd?.ProductId" asp-page="/Cart" method="post">
-                                       @*  uygulama burada patlýyor *@
+                                        @*  uygulama burada patlýyor *@
                                         <input type="hidden" name="ProductId" value="@prd.ProductId" />
                                         <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                                         <button class="btn btn-outline-primary"><i class="fa fa-cart-plus"></i></button>
                                     </form>
-                                </div>
-                                <div class="col-md-9">
-                                    <a asp-action="Get" asp-controller="Product" asp-route-id="@prd?.ProductId" class="btn btn-primary"><i class="fa-solid fa-arrow-right"></i> Details</a>
-                                </div>
 
-
+                                </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
-
             }
         </div>
     </div>

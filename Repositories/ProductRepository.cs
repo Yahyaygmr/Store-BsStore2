@@ -35,7 +35,8 @@ namespace Repositories
         public IQueryable<Product> GetAllProductsWithDetails(ProductRepuestParameters p)
         {
             return _context.Products.FilteredByCategoryId(p.CategoryId)
-                .FilteredBySearchTerm(p.SearchTerm);
+                .FilteredBySearchTerm(p.SearchTerm)
+                .FilteredByPrice(p.MinPrice, p.MaxPrice, p.IsValidPrice);
         }
 
         public Product? GetOneProduct(int id, bool trackChanges)
