@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace StoreApp.Infrasrtructe.Extensions
+namespace StoreApp.Infrasrtructure.Extensions
 {
     public static class SessionExtension
     {

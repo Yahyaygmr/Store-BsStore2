@@ -1,5 +1,5 @@
 ﻿using Entities.Models;
-using StoreApp.Infrasrtructe.Extensions;
+using StoreApp.Infrasrtructure.Extensions;
 using System.Text.Json.Serialization;
 
 namespace StoreApp.Models

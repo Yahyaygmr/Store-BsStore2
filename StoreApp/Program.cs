@@ -1,4 +1,4 @@
-using StoreApp.Infrasrtructe.Extensions;
+using StoreApp.Infrasrtructure.Extensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
