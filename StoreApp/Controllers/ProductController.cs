@@ -4,6 +4,7 @@ using Repositories;
 using Repositories.Contracts;
 using Services.Contracts;
 using Entities.RequestParameters;
+using StoreApp.Models;
 
 namespace StoreApp.Controllers
 {
@@ -30,10 +31,18 @@ namespace StoreApp.Controllers
 
         public IActionResult ProductCard(ProductRepuestParameters p)
         {
-            var model = _serviceManager.ProductService.GetAllProductsWithDetails(p);
-            // view kýsmýnda IQueryable lullandýðýmýz için tolist eklemedik sonuna (List<Product> olursa .Tolist() eklenmeli
-            // Index örnek olarak alýnýp karþýlaþtýrýlabilir. Çýktý ayný fakat yöntem farklý)
-            return View(model);
+            var products = _serviceManager.ProductService.GetAllProductsWithDetails(p);
+            var pagination = new Pagination()
+            {
+                CurrentPage = p.PageNumber,
+                ItemsPerPage = p.PageSize,
+                TotalItems = _serviceManager.ProductService.GetAllProducts(false).Count()
+            };
+            return View(new ProductListViewModel()
+            {
+                Products = products,
+                Pagination = pagination
+            });
         }
     }
 }
