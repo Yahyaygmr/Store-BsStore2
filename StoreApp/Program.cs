@@ -20,13 +20,14 @@ var app = builder.Build();
 
 
 app.UseStaticFiles();
+
+app.UseRouting();
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
 
 app.UseHttpsRedirection();
-
-app.UseRouting();
 
 app.UseEndpoints(endpoints =>
 {

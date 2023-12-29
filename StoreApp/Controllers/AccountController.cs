@@ -15,9 +15,12 @@ namespace StoreApp.Controllers
             _signInManager = signInManager;
         }
 
-        public IActionResult Login()
+        public IActionResult Login([FromQuery(Name = "returnUrl")] string returnUrl = "/")
         {
-            return View();
+            return View(new LoginModel()
+            {
+                ReturnUrl = returnUrl
+            });
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -29,7 +32,7 @@ namespace StoreApp.Controllers
                 if (user != null)
                 {
                     await _signInManager.SignOutAsync();
-                    if ((await _signInManager.PasswordSignInAsync(user,model.Password,false,false)).Succeeded)
+                    if ((await _signInManager.PasswordSignInAsync(user, model.Password, false, false)).Succeeded)
                     {
                         return Redirect(model?.ReturnUrl ?? "/");
                     }
@@ -37,6 +40,11 @@ namespace StoreApp.Controllers
                 ModelState.AddModelError("Error", "Invalid username or password !");
             }
             return View();
+        }
+        public async Task<IActionResult> Logout([FromQuery(Name = "returnUrl")] string returnUrl = "/")
+        {
+            await _signInManager.SignOutAsync();
+            return Redirect(returnUrl);
         }
         public IActionResult Register()
         {
