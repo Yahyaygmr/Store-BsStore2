@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities.Dtos;
 using Entities.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace StoreApp.Infrasrtructure.Mapper
 {
@@ -10,6 +11,7 @@ namespace StoreApp.Infrasrtructure.Mapper
         {
             CreateMap<ProductDtoForInsertion, Product>();
             CreateMap<ProductDtoForUpdate, Product>().ReverseMap();
+            CreateMap<UserDtoForCreation, IdentityUser>();
         }
     }
 }
